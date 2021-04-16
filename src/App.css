@@ -12,3 +12,53 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+.todoheading{
+  color: rgba(255, 255, 255, 0);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 50px;
+  -webkit-text-stroke-width: 0.8px; 
+  -webkit-text-stroke-color: rgb(31, 237, 252);
+}
+
+.inputval{
+  border: none;
+  outline: none;
+  height: 25px;
+  border-radius: 5px 0px 0px 10px;
+  padding-left: 10px;
+}
+
+.submitbutton{
+  height: 27px;
+  width: 55px;
+  border: none;
+  outline: none;
+  border-radius: 0px 10px 5px 0px;
+  background-color: teal;
+  color: #fff;
+}
+
+.todolist{
+ background: teal;
+ width: 240px;
+ border-radius: 5px 10px;
+ margin-top: 10px; 
+ margin-bottom: 2px; 
+ font-size: 18px;
+ height: 28px;
+}
+
+.todoname{
+ font-size: 16px;
+ margin-bottom: 15px;
+}
+
+.deletebutton{
+  border: none;
+  outline: none;
+  background:tomato;
+  float: right;
+  margin:6px 10px 0px 0px;
+  border-radius: 1px 5px;
+}
