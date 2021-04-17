@@ -1,15 +1,17 @@
-export const AddTodoAction = (todo) => (dispatch, getState) => {
-    const { Todo: { todos }, } = getState();
+import jsonPlaceholder from "../api/JsonPlaceholder";
 
-    const hasTodo = todos.find((i) => i.todo === todo);
+// export const AddTodoAction = (todo) => (dispatch, getState) => {
+//     const { Todo: { todos }, } = getState();
 
-    if (!hasTodo && todo !== '') {
-        dispatch({
-            type: "ADD_TODO",
-            payload: [{ id: todo, todo }, ...todos]
-        })
-    }
-};
+//     const hasTodo = todos.find((i) => i.todo === todo);
+
+//     if (!hasTodo && todo !== '') {
+//         dispatch({
+//             type: "ADD_TODO",
+//             payload: [{ id: todo, todo }, ...todos]
+//         })
+//     }
+// };
 
 export const RemoveTodoAction = (todo) => (dispatch, getState) => {
     const { Todo: { todos }, } = getState();
@@ -19,3 +21,12 @@ export const RemoveTodoAction = (todo) => (dispatch, getState) => {
         payload: todos.filter((t) => t.id !== todo.id),
     })
 }
+
+export const AddTodoAction = () => async (dispatch) => {
+    const response = await jsonPlaceholder.get("/todos");
+
+    dispatch({
+        type: "ADD_TODO",
+        payload: response.data
+    });
+};

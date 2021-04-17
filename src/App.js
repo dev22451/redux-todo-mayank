@@ -1,3 +1,4 @@
+import Daco from './Daco1.png'
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AddTodoAction, RemoveTodoAction } from './actions/TodoActions';
@@ -25,9 +26,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-
-        <h2 className="todoheading">Todo List App in Redux</h2>
-
+        <img src={Daco} alt="" width="200px" className="Daco" />
+        <h2 className="todoheading">Todo App <span className='reduxhead'>Redux</span></h2>
         <form onSubmit={handleSubmit}>
           <input
             autoFocus
@@ -43,7 +43,9 @@ function App() {
           {
             todos && todos.map((t) => (
               <div key={t.id} className="todolist">
-                <span className="todoname">{t.todo}</span>
+                <input type="checkbox" className="todocheckbox" checked={t.completed} />
+                <span className="todoname">{t.title}</span>
+                {console.log(t)}
                 <button
                   className="deletebutton"
                   onClick={() => removeHandler(t)}>x</button>
