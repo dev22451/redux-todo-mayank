@@ -6,6 +6,8 @@ const TodoReducer = (state = { todos: [] }, action) => {
         case "REMOVE_TODO":
             return { todos: action.payload };
 
+        case "CHECK_TODO":
+            return { todos: action.payload };
 
         default:
             return state;
