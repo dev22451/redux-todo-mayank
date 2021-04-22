@@ -1,4 +1,4 @@
-const ApiReducer = (state = { success: '' }, action) => {
+const ApiReducer = (state = { success: [], }, action) => {
     switch (action.type) {
 
         case "API_CALL":

@@ -1,27 +1,36 @@
 import Daco from './Daco1.png'
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AddTodoAction, RemoveTodoAction } from './actions/TodoActions';
 import { ApiCalling } from './actions/ApiActions';
 import './App.css';
+import axios from 'axios';
+import JsonPlaceholder from './api/JsonPlaceholder';
+
 
 function App() {
   const [todo, setTodo] = useState();
+  const [todoarr, setTodoarr] = useState([]);
 
   const dispatch = useDispatch();
 
   const Todo = useSelector(state => state.Todo);
   const Api = useSelector(state => state.Api);
 
-  const success = Api;
+
   const { todos } = Todo;
 
-  if (success.success === 201) {
-    var msg = "successfully created";
-  }
-  if (success.success === 404) {
-    var msg = "error 404"
-  }
+
+
+
+  useEffect(() => {
+    setTimeout(async () => {
+      let result = await JsonPlaceholder.get("/todos?userId=1");
+      setTodoarr({ tasks: result.data });
+    }, 1000);
+  }, []);
+
+  console.log(todoarr.tasks);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,18 +38,18 @@ function App() {
 
   }
 
-  const removeHandler = (t) => {
-    dispatch(RemoveTodoAction(t));
+  const handleApi = () => {
+    dispatch(ApiCalling(todoarr.tasks))
   }
 
-  const handleApi = () => {
-    dispatch(ApiCalling(todo));
+  const removeHandler = (t) => {
+    dispatch(RemoveTodoAction(t));
   }
 
   return (
     <div className="App">
       <header className="App-header">
-        <img src={Daco} alt="" width="200px" className="Daco" />
+
         <h2 className="todoheading">Todo App <span className='reduxhead'>Redux</span></h2>
         <form onSubmit={handleSubmit}>
           <input
@@ -54,7 +63,6 @@ function App() {
         <button onClick={handleApi}>Api</button>
         {/* TaskList */}
 
-        <h3>{msg}</h3>
 
         <div>
           {
@@ -71,6 +79,22 @@ function App() {
             ))
           }
         </div>
+
+        <div>
+          {
+            todoarr.tasks && todoarr.tasks.map((s, index) => (
+              <div key={s.id} className="todolist">
+
+                <input className="todocheckbox" type="checkbox" checked={s.completed} />
+
+                <span className="todoname">{s.title}</span>
+
+              </div>
+            ))
+          }
+        </div>
+
+
 
       </header>
     </div>
